@@ -42,7 +42,7 @@ public struct FAStoryVcStack  {
     // -----------------------------------------------------
     
     /// reference to all stories
-    internal var stories: [FAStory]!
+    internal var stories: [FAStoryTeller]!
     // -----------------------------------------------------
     
     
@@ -72,7 +72,7 @@ public struct FAStoryVcStack  {
     /// - Parameter vc: The story view controller that's about to be displayed to the user
     public mutating func set(currentViewController vc: FAStoryViewController) {
         guard let story = vc.story else {return}
-        guard let idx = stories.firstIndex(of: story) else {return}
+        guard let idx = stories.enumerated().first(where: { $0.element.id == story.id } )?.offset else { return }
         
         let max = stories.endIndex - 1
         

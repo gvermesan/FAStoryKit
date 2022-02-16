@@ -72,7 +72,7 @@ internal class FAStoryController: NSObject, FAStoryContentDelegate {
     // Public properties
     // -----------------------------------
     /// Story object
-    var story: FAStory
+    var story: FAStoryTeller
     
     /// Currently active content
     var currentContent: FAStoryAddible? {
@@ -129,7 +129,7 @@ internal class FAStoryController: NSObject, FAStoryContentDelegate {
     // ==================================================== //
     // MARK: Init
     // ==================================================== //
-    init(with story: FAStory) {
+    init(with story: FAStoryTeller) {
         self.story = story
         self.contentCount = story.content?.count ?? 0
         self.currentContent = story.content?.first

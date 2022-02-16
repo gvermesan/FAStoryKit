@@ -12,6 +12,7 @@ import UIKit
 /// Main story container object
 
 final public class FAStory: NSObject, FAStoryTeller, Decodable {
+    
     // ==================================================== //
     // MARK: Properties
     // ==================================================== //
@@ -24,7 +25,8 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
     
     /// Story previewImage as seen on the highlights
     public var previewImage: UIImage!
-    
+    public var previewImageUrlString: String!
+
     /// Content(s) of the story
     public var content: [FAStoryAddible]?
     
@@ -34,7 +36,7 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
     public var contentNature: FAStoryContentNature
     
     /// ident of the story
-    public var ident: String
+    public var id: String
     
     /// flag that returns if th story has been watched before
     public var isSeen: Bool {
@@ -46,7 +48,7 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
             DispatchQueue.global(qos: .userInteractive).async {
                 NotificationCenter.default.post(name: .storySeen,
                                                 object: nil,
-                                                userInfo: ["storyIdent":self.ident])
+                                                userInfo: ["storyIdent":self.id])
             }
         }
     }
@@ -73,7 +75,7 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
     
     /// story key for the UserDefaults
     private var storySeenKey: String {
-        return "isStorySeen_\(ident)"
+        return "isStorySeen_\(id)"
     }
     // -----------------------------------
     
@@ -93,8 +95,8 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
         contentNature = FAStoryContentNature(rawValue: nature) ?? .builtIn
         name = try values.decode(String.self, forKey: .name)
         previewImage = UIImage(named: imageName)
-        self.ident = ident
-        
+        self.id = ident
+        previewImageUrlString = ""
         super.init()
         
         let content = try values.decode([_StoryContentWrapper].self, forKey: .content)
@@ -147,7 +149,8 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
         self.name = name
         self.content = [content]
         self.contentNature = flag ? .builtIn : .online
-        self.ident = ident
+        self.id = ident
+        self.previewImageUrlString = ""
         //
         super.init()
         //
@@ -158,7 +161,8 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
     /// The created story object nature will be __builtIn__
     public override init() {
         contentNature = .builtIn
-        ident = UUID().uuidString
+        id = UUID().uuidString
+        previewImageUrlString = ""
         super.init()
     }
 

@@ -45,7 +45,7 @@ final public class FAStoryViewController: UIViewController, StoryControllerDeleg
     // MARK: Self properties
     
     /// story object
-    public var story: FAStory! {
+    public var story: FAStoryTeller! {
         didSet {
             guard isViewLoaded else {return}
             guard let s = story else {return}

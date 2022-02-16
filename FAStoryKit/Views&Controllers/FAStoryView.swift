@@ -61,7 +61,7 @@ final public class FAStoryView: UIView {
     // -----------------------------------
     // Private properties
     // -----------------------------------
-    private var stories: [FAStory]?
+    private var stories: [FAStoryTeller]?
     
     // -----------------------------------
     
@@ -218,7 +218,7 @@ extension FAStoryView: UICollectionViewDataSource {
         
         cell.setBorder(width: w, color: c)
         
-        cell.storyIdent = stories![indexPath.row].ident
+        cell.storyIdent = stories![indexPath.row].id
         
         if let image = stories?[indexPath.row].previewImage {
             cell.setImage(image)

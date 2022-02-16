@@ -26,7 +26,7 @@ public extension FAStory {
         
         self.name = name
         self.contentNature = nature == 0 ? .builtIn : .online
-        self.ident = ident
+        self.id = ident
         
         switch self.contentNature {
         case .online:

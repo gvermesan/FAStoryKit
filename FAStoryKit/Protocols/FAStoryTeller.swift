@@ -13,15 +13,20 @@ import UIKit
 public protocol FAStoryTeller {
     
     /// name of the story
-    var name: String! {get set}
-    
+    var name: String! { get set }
+    var id: String { get }
+
     /// preview image to be displayed
-    var previewImage: UIImage! {get set}
-    
+    var previewImage: UIImage! { get set }
+    var previewImageUrlString: String! { get set }
+
+    var isSeen: Bool { get set }
+
     /// content that's included under the story
-    var content: [FAStoryAddible]? {get set}
+    var content: [FAStoryAddible]? { get set }
     
     /// nature of the content - whether the content is built in or online
-    var contentNature: FAStoryContentNature {get set}
+    var contentNature: FAStoryContentNature { get set }
     
+    func setSeen() 
 }

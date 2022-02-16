@@ -10,6 +10,6 @@ import UIKit
 
 public protocol FAStoryDataSource: AnyObject {
     /// Method to ask for the Stories
-    func stories() -> [FAStory]?
+    func stories() -> [FAStoryTeller]?
 }
 
