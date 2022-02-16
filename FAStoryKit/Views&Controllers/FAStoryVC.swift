@@ -100,7 +100,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     private var headerView: UIView!
     
     /// preview imageView
-    var imgViewPreview: UIImageView!
+    public var imgViewPreview: UIImageView!
     
     /// button to dismiss
     private var btnDismiss: UIButton!
