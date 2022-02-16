@@ -42,7 +42,7 @@ public struct FAStoryVcStack  {
     // -----------------------------------------------------
     
     /// reference to all stories
-    internal var stories: [FAStoryTeller]!
+    public var stories: [FAStoryTeller]!
     // -----------------------------------------------------
     
     
