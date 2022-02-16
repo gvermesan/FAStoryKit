@@ -16,7 +16,7 @@ public protocol FAStoryViewControllerDelegate: AnyObject {
     func dismissButtonImage() -> UIImage?
 }
 
-final public class FAStoryViewController: UIViewController, StoryControllerDelegate, SwipeDismissInteractible {
+open class FAStoryViewController: UIViewController, StoryControllerDelegate, SwipeDismissInteractible {
 
   
     // ==================================================== //
@@ -100,7 +100,7 @@ final public class FAStoryViewController: UIViewController, StoryControllerDeleg
     private var headerView: UIView!
     
     /// preview imageView
-    private var imgViewPreview: UIImageView!
+    var imgViewPreview: UIImageView!
     
     /// button to dismiss
     private var btnDismiss: UIButton!
