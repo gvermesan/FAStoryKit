@@ -174,7 +174,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     // ==================================================== //
     // MARK: VC lifecycle
     // ==================================================== //
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         _init()
         _configUI()
