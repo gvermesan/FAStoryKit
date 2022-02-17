@@ -57,7 +57,7 @@ public protocol FAStoryContentCacher: SessionDownloadable, NSCacheDelegate {
 //
 public extension FAStoryContentCacher {
     /// Method to initialize the cacher
-    func start() {
+    func initializeCacher() {
         cacher = NSCache()
         cacher.name = cacheName
         cacher.evictsObjectsWithDiscardedContent = shouldPurgeWhenReleased
@@ -91,7 +91,7 @@ public extension FAStoryContentCacher {
         - name: Name that will be used for saving downloaded file
         - destination: Destination to save the downloaded file
      */
-    func startDownload(url: URL, name: String) {
+    func startDownload(url: URL, name: String, delegate: DownloadServiceDelegate? = nil) {
         //
         // Initialize the service
         //
@@ -114,7 +114,7 @@ public extension FAStoryContentCacher {
                                              fileType: _type) else {return}
         
         downloadService = _service
-        downloadService.delegate = self
+        downloadService.delegate = delegate ?? self
         downloadService.start()
         
     }
@@ -130,6 +130,6 @@ public extension FAStoryContentCacher {
     }
     
     func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
-        print("dl error")
+        print("dl errType: \(errType),  error message: \(err?.localizedDescription)")
     }
 }

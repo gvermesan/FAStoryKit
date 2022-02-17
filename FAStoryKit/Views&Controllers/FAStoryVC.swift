@@ -279,7 +279,9 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     }
     
     func storyAssetInitStart() {
-        _displayActivity()
+        DispatchQueue.main.async { [weak self] in
+            self?._displayActivity()
+        }
     }
     
     func storyAssetReady<Asset>(_ asset: FAStoryAsset<Asset>?) {
