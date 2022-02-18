@@ -555,8 +555,8 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
             //
             btnDismiss.addSubview(imgView)
             //
-            imgView.widthAnchor.constraint(equalTo: btnDismiss.widthAnchor, multiplier: 0.4).isActive = true
-            imgView.heightAnchor.constraint(equalTo: btnDismiss.heightAnchor, multiplier: 0.4).isActive = true
+            imgView.widthAnchor.constraint(equalTo: btnDismiss.widthAnchor, multiplier: 1).isActive = true
+            imgView.heightAnchor.constraint(equalTo: btnDismiss.heightAnchor, multiplier: 1).isActive = true
             imgView.centerXAnchor.constraint(equalTo: btnDismiss.centerXAnchor).isActive = true
             imgView.centerYAnchor.constraint(equalTo: btnDismiss.centerYAnchor).isActive = true
     
@@ -569,9 +569,9 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         
         headerView.addSubview(btnDismiss)
         
-        btnDismiss.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        btnDismiss.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        btnDismiss.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -4).isActive = true
+        btnDismiss.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        btnDismiss.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        btnDismiss.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10).isActive = true
         btnDismiss.centerYAnchor.constraint(equalTo: imgViewPreview.centerYAnchor).isActive = true
         btnDismiss.addTarget(self, action: #selector(_dismiss), for: .touchUpInside)
         
@@ -808,7 +808,8 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     /// Show the activity view
     private func _displayActivity() {
         activityView?.removeFromSuperview()
-        activityView = UIActivityIndicatorView(style: .whiteLarge)
+        activityView = UIActivityIndicatorView(style: .medium)
+        activityView.color = .white
         activityView.translatesAutoresizingMaskIntoConstraints = false
         contentView.insertSubview(activityView, at: 0)
         activityView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true

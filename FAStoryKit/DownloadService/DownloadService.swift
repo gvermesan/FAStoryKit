@@ -36,9 +36,7 @@ public struct DlHandler {
     var destFileName: String?           // The name of the final file - if this is empty than the downloade file will not be copied
     var fileType: String?               // Type of the final file
     var middleFolder: String?
-    var sDestFolder: String? {          // Destination folder in String
-        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.absoluteString
-    }
+    var sDestFolder: String?
     
     public var destPathFinal: String? {        // Destination path in URL if the downloaded file needs to be copied to somewhere
         get {
@@ -67,6 +65,26 @@ public struct DlHandler {
             if password != nil {self.password = password}
             if filename != nil {self.destFileName = filename}
             if fileType != nil {self.fileType = fileType}
+            
+            let fileManager = FileManager.default
+            let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let url = cacheDirectory.appendingPathComponent("FAStory", isDirectory: true)
+            
+            guard !fileManager.fileExists(atPath: url.path) else {
+                
+                sDestFolder = url.path
+                return
+            }
+
+            do {
+                try fileManager.createDirectory(
+                    atPath: url.path,
+                    withIntermediateDirectories: true,
+                    attributes: nil)
+            } catch {
+                print("Error creating folder: \(error)")
+            }
+            sDestFolder = url.path
         }
     }
 } // DlHandler_typ;
