@@ -116,20 +116,5 @@ public extension FAStoryContentCacher {
         downloadService = _service
         downloadService.delegate = delegate ?? self
         downloadService.start()
-        
-    }
-    
-    func dlComplete(toPath: String) {
-        guard let i = UIImage(contentsOfFile: toPath), let key = assetUrl else {return}
-        cacher.setObject(i, forKey: key as AnyObject)
-    }
-    
-    func dlProgress(_ progress: Float) {
-        self.downloadProgress = progress
-        print("dl progress: \(progress)")
-    }
-    
-    func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
-        print("dl errType: \(errType),  error message: \(err?.localizedDescription)")
     }
 }

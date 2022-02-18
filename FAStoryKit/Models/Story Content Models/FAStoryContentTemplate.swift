@@ -149,6 +149,8 @@ public class FAStoryContentTemplate<Asset>: NSObject, FAStoryAddible, FAStoryCon
         
         guard let sub = _path.split(separator: "/").last else {return "content"}
         
+        return String(sub)
+
         guard let raw = sub.split(separator: ".").last else {return String(sub)}
         
         return String(raw)
@@ -173,7 +175,6 @@ public class FAStoryContentTemplate<Asset>: NSObject, FAStoryAddible, FAStoryCon
     // -----------------------------------
     // Private properties
     // -----------------------------------
-    /// content nature
     private var _contentNature = FAStoryContentNature.builtIn
     
     // -----------------------------------
@@ -181,12 +182,11 @@ public class FAStoryContentTemplate<Asset>: NSObject, FAStoryAddible, FAStoryCon
     
     // ==================================================== //
     // MARK: Init
-    // ==================================================== //
-    
     public init(type: FAStoryContentType, duration: Double=0) {
         super.init()
         self.duration = duration
         self.contentType = type
+        initializeCacher()
     }
     
     // ==================================================== //
@@ -215,6 +215,25 @@ public class FAStoryContentTemplate<Asset>: NSObject, FAStoryAddible, FAStoryCon
     }
     
     public func stop() {}
+    
+    //
+    // MARK: DownloadServiceDelegate methods
+    //
+    public func dlComplete(toPath: String) {
+        print("dl completed: \(toPath)")
+        downloadService = nil
+    }
+    
+    public func dlProgress(_ progress: Float) {
+        DispatchQueue.main.async { [weak self] in
+            self?.downloadProgress = progress
+        }
+    }
+    
+    public func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
+        print(err?.localizedDescription ?? "no error text")
+        downloadService = nil
+    }
     // -----------------------------------
     
     

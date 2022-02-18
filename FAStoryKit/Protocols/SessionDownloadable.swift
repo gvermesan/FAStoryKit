@@ -52,25 +52,4 @@ public extension SessionDownloadable {
         
         downloadService.start()
     }
-    
-    
-    //
-    // MARK: DownloadServiceDelegate methods
-    //
-    func dlComplete(toPath: String) {
-        print("dl completed: \(toPath)")
-        downloadService = nil
-    }
-    
-    func dlProgress(_ progress: Float) {
-        DispatchQueue.main.async { [weak self] in
-            self?.downloadProgress = progress
-        }
-    }
-    
-    func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
-        print(err?.localizedDescription ?? "no error text")
-        downloadService = nil
-    }
-    
 }

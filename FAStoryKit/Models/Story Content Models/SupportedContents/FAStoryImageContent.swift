@@ -45,7 +45,6 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
         self.contentType = .image
         self.asset = FAStoryAsset(with: UIImage())
         self.asset.externUrl = externUrl
-        initializeCacher()
         print("asset url: \(externUrl?.absoluteString ?? "no urls")")
     }
     
@@ -99,7 +98,7 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
             }
         case .online:
             guard let _cachedImage = try? getObject(withName: contentName) as? UIImage else {
-                startDownload(url: assetUrl, name: contentName)
+                startDownload(url: assetUrl, name: contentName, delegate: self)
                 delegate?.contentDownloadStarted(for: asset)
                 return
             }
@@ -166,31 +165,27 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
     // -----------------------------------
     
    
-   
-}
-
-//
-// MARK: DownloadServiceDelegate
-//
-internal extension FAStoryImageContent {
+    //
+    // MARK: DownloadServiceDelegate
+    //
     
-    func dlComplete(toPath: String) {
-        guard let i = UIImage(contentsOfFile: toPath), let key = assetUrl else {return}
-        cacher.setObject(i, forKey: key as AnyObject)
+    public override func dlComplete(toPath: String) {
+        guard let i = UIImage(contentsOfFile: toPath) else {return}
+        cacher.setObject(i, forKey: contentName as AnyObject)
         delegate?.contentDownloadFinished(for: asset, success: true)
         contentConfigure()
         _ = start()
     }
     
-    func dlProgress(_ progress: Float) {
+    public override func dlProgress(_ progress: Float) {
         self.downloadProgress = progress
         delegate?.contentDownloadProgress(for: asset, progress: progress)
         print("dl progress: \(progress)")
     }
     
-    func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
+    public override func dlError(err: Error?, errType: DonwloadServiceErrorsEnum) {
         delegate?.contentDownloadFinished(for: asset, success: false)
         print("dl error")
     }
-    
 }
+

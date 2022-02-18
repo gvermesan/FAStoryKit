@@ -261,7 +261,11 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     
     func storyAssetDownloadProgress<Asset>(_ asset: FAStoryAsset<Asset>, progress: Float) { }
     
-    func storyAssetDownloadCompleted<Asset>(_ asset: FAStoryAsset<Asset>) { }
+    func storyAssetDownloadCompleted<Asset>(_ asset: FAStoryAsset<Asset>) {
+        DispatchQueue.main.async { [weak self] in
+            self?.storyAssetChanged(asset)
+        }
+    }
     
     func storyAssetChanged<Asset>(_ asset: FAStoryAsset<Asset>?) {
         print("story content changed")
@@ -285,11 +289,13 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     }
     
     func storyAssetReady<Asset>(_ asset: FAStoryAsset<Asset>?) {
-        _hideActivity()
-        if let _asset = asset as? FAStoryAsset<AVPlayer> {
-            _contentConfigVideo(with: _asset.content)
-        } else if let _asset = asset as? FAStoryAsset<UIImage> {
-            _contentConfigImage(with: _asset.content)
+        DispatchQueue.main.async { [weak self] in
+            self?._hideActivity()
+            if let _asset = asset as? FAStoryAsset<AVPlayer> {
+                self?._contentConfigVideo(with: _asset.content)
+            } else if let _asset = asset as? FAStoryAsset<UIImage> {
+                self?._contentConfigImage(with: _asset.content)
+            }
         }
     }
     
