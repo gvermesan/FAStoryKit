@@ -83,15 +83,18 @@ public struct FAStoryVcStack  {
         currentVc = vc
         
         // set the previousVc
+        
+        let vcType = type(of: vc)
+        
         if idx > 0 {
-            previousVc = FAStoryViewController()
+            previousVc = vcType.init()
             previousVc.delegate = vc.delegate
             previousVc.story = stories[idx - 1]
         }
         
         // set the next vc 
         if idx < max {
-            nextVc = FAStoryViewController()
+            nextVc = vcType.init()
             nextVc.delegate = vc.delegate
             nextVc.story = stories[idx + 1]
         }

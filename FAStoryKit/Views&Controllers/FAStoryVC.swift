@@ -571,7 +571,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         
         btnDismiss.widthAnchor.constraint(equalToConstant: 25).isActive = true
         btnDismiss.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        btnDismiss.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10).isActive = true
+        btnDismiss.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20).isActive = true
         btnDismiss.centerYAnchor.constraint(equalTo: imgViewPreview.centerYAnchor).isActive = true
         btnDismiss.addTarget(self, action: #selector(_dismiss), for: .touchUpInside)
         
