@@ -37,11 +37,12 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
     // ==================================================== //
     // MARK: Init
     // ==================================================== //
-    public required init(assetURL: URL, externUrl: URL?=nil, duration: Double=0) {
+    public required init(assetURL: URL, id: String, externUrl: URL? = nil, duration: Double=0) {
         super.init(type: .image, duration: duration)
         self.assetUrl = assetURL
         self.interactionUrl = externUrl
         self.duration = duration
+        self.id = id
         self.contentType = .image
         self.asset = FAStoryAsset(with: UIImage())
         self.asset.externUrl = externUrl

@@ -121,6 +121,8 @@ public class FAStoryContentTemplate<Asset>: NSObject, FAStoryAddible, FAStoryCon
     
     public var duration: Double = 0
     
+    public var id: String!
+    
     public var isContentSeen: Bool = false
     
     public var content: Asset? {

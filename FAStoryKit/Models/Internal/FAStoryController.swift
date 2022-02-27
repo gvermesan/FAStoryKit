@@ -210,6 +210,7 @@ internal class FAStoryController: NSObject, FAStoryContentDelegate {
     
     /// Start / Continue the current content
     func start() {
+        currentContent?.isContentSeen = true
         if let c = currentContent as? FAStoryImageContent {
             c.contentConfigure()
         }

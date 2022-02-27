@@ -80,11 +80,12 @@ public class FAStoryVideoContent: FAStoryContentTemplate<AVPlayer>, FAStoryConte
     // ==================================================== //
     // MARK: Init
     // ==================================================== //
-    public required init(assetURL: URL, externUrl: URL?=nil, duration: Double=0) {
+    public required init(assetURL: URL, id: String, externUrl: URL? = nil, duration: Double=0) {
         super.init(type: .video, duration: duration)
         self.assetUrl = assetURL
         self.interactionUrl = externUrl
         self.duration = duration
+        self.id = id
         self.contentType = .video
         self.asset = FAStoryAsset(with: AVPlayer())
         self.asset.externUrl = externUrl

@@ -147,7 +147,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     private var externUrlView: ExternalLinkControllerView!
     
     /// ContentView bottom offset
-    private var kContentBottomOffset: CGFloat = 60
+    private var kContentBottomOffset: CGFloat = 20
     
     /// Safari VC for external url's
     private var safariVc: SFSafariViewController!
@@ -217,6 +217,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         storyController?.pause()
+        story?.setSeen()
     }
   
     public override func viewDidDisappear(_ animated: Bool) {

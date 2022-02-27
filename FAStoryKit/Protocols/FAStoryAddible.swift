@@ -31,6 +31,8 @@ public protocol FAStoryAddible {
     
     /// content was seen by the user
     var isContentSeen: Bool {get set}
+   
+    var id: String! { get set }
     
     /// content display start
     func start() -> Bool

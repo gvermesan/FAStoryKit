@@ -126,11 +126,17 @@ final public class FAStory: NSObject, FAStoryTeller, Decodable {
             
             switch contentType {
             case .image:
-                let _content = FAStoryImageContent(assetURL: assetUrl, externUrl: externalUrl, duration: duration)
+                let _content = FAStoryImageContent(assetURL: assetUrl,
+                                                   id: UUID().uuidString,
+                                                   externUrl: externalUrl,
+                                                   duration: duration)
                 _content.setContentNature(self.contentNature)
                 self.addContent(_content)
             case .video:
-                let _content = FAStoryVideoContent(assetURL: assetUrl, externUrl: externalUrl, duration: duration)
+                let _content = FAStoryVideoContent(assetURL: assetUrl,
+                                                   id: UUID().uuidString,
+                                                   externUrl: externalUrl,
+                                                   duration: duration)
                 _content.setContentNature(self.contentNature)
                 self.addContent(_content)
             default:
