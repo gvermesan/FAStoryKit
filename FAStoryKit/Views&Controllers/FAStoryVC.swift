@@ -142,12 +142,9 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
     
     /// Error container view
     private var errorContainerView: UIView!
-    
-    /// Extenrnal link view
-    private var externUrlView: ExternalLinkControllerView!
-    
+        
     /// ContentView bottom offset
-    private var kContentBottomOffset: CGFloat = 20
+    private var kContentBottomOffset: CGFloat = 5
     
     /// Safari VC for external url's
     private var safariVc: SFSafariViewController!
@@ -278,9 +275,6 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         } else if let a = asset as? FAStoryAsset<AVPlayer> {
             _contentConfigVideo(with: a.content)
         }
-        
-        _externUrlView(url: asset?.externUrl)
-        
     }
     
     func storyAssetInitStart() {
@@ -636,42 +630,6 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         }
         
         return _view
-    }
-    
-    
-    /// External URL view
-    private func _externUrlView(url: URL?) {
-        guard let _url = url else {
-            externUrlView?.removeFromSuperview()
-            if externUrlView != nil {
-                externUrlView = nil 
-            }
-            return
-        }
-        
-        if externUrlView == nil {
-            externUrlView = ExternalLinkControllerView(with: _url)
-            externUrlView.title = "Daha fazlası"
-            externUrlView.color = .white
-            externUrlView.font = UIFont(name: "Brown-Regular", size: 14)
-            externUrlView.delegate = self
-            
-            containerView.addSubview(externUrlView)
-            containerView.bringSubviewToFront(externUrlView)
-            
-            externUrlView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-            externUrlView.heightAnchor.constraint(equalToConstant: kContentBottomOffset).isActive = true
-            externUrlView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-            
-            if #available(iOS 11, *) {
-                externUrlView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            } else {
-                externUrlView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
-            }
-        } else {
-            externUrlView.replaceUrl(_url)
-        }
-        
     }
     
     
