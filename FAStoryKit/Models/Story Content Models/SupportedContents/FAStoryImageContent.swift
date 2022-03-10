@@ -37,7 +37,7 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
     // ==================================================== //
     // MARK: Init
     // ==================================================== //
-    public required init(assetURL: URL, id: String, externUrl: URL? = nil, duration: Double=0) {
+    public required init(assetURL: URL?, id: String, externUrl: URL? = nil, duration: Double=0) {
         super.init(type: .image, duration: duration)
         self.assetUrl = assetURL
         self.interactionUrl = externUrl
@@ -89,8 +89,8 @@ public class FAStoryImageContent: FAStoryContentTemplate<UIImage>, FAStoryConten
         
         switch contentNature {
         case .builtIn:
-            if let image = UIImage(named: assetUrl.absoluteString) {
-                asset.content = image
+            if let data = try? Data(contentsOf: assetUrl) {
+                asset.content = UIImage(data: data)
                 asset.externUrl = interactionUrl
                 delegate?.contentReady(asset)
                 _ = start()

@@ -515,7 +515,7 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         headerView.addSubview(imgViewPreview)
         
         imgViewPreview.topAnchor.constraint(equalTo: currentStoryIndicator.bottomAnchor, constant: 8).isActive = true
-        imgViewPreview.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 4).isActive = true
+        imgViewPreview.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
         imgViewPreview.widthAnchor.constraint(equalToConstant: 40).isActive = true
         imgViewPreview.heightAnchor.constraint(equalTo: imgViewPreview.widthAnchor).isActive = true
         
