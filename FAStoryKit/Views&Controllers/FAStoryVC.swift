@@ -658,6 +658,8 @@ open class FAStoryViewController: UIViewController, StoryControllerDelegate, Swi
         guard storyController != nil else {return}
         if storyController.setNext() {
             _ = currentStoryIndicator.next()
+        } else {
+            _dismiss()
         }
     }
     
